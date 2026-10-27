@@ -1,0 +1,5 @@
+# Windows external-Python runtime; advanced DearEIS/Tafel environments are separate.
+originpro==1.1.15
+matplotlib==3.11.2
+numpy>=1.25
+PyYAML>=6

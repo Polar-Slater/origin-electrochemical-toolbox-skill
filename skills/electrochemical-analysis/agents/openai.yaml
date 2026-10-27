@@ -1,0 +1,4 @@
+interface:
+  display_name: "Electrochemical Analysis"
+  short_description: "Process CHI measurements and plot them in OriginPro"
+  default_prompt: "Use $electrochemical-analysis to process my CHI measurements and create editable OriginPro figures."

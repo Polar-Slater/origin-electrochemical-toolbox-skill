@@ -1,0 +1,14 @@
+.venv/
+temp/
+__pycache__/
+*.py[cod]
+outputs/
+local/
+electrochemical-test-output/
+electrochemical-toolbox/
+origin-pro-mcp-skill/
+*.opju
+*.opj
+*.bak
+.env
+skills/*/references/local-runtime.md
