@@ -13,7 +13,9 @@ def read_table(path):
     for i, row in enumerate(rows):
         if row == ['Frequency', "Z'", "-Z''", 'Z', 'Phase']:
             found = (i, 'EIS', [(1,2)], set(range(5)), False)
-        elif row == ['File', 'Point', 'Original Potential', 'Original Current', 'Potential (V vs. RHE, iR-corrected)', 'Current density']:
+        elif (len(row) == 6 and row[:4] == ['File', 'Point', 'Original Potential', 'Original Current']
+              and row[4] in ['Potential (V vs. RHE, iR-corrected)', 'Potential (V vs. RHE)']
+              and row[5] == 'Current density'):
             found = (i, 'LSV', [(4,5)], set(range(1,6)), False)
         elif row[:2] == ['Scan rate', 'Delta j mA/cm^2'] and len(row) == 3:
             found = (i, 'ECSA delta j', [(0,1)], {0,1}, False)

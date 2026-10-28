@@ -2,6 +2,14 @@
 
 This project uses semantic versioning. VERSION.txt is the authoritative release version.
 
+## [0.1.1] - 2026-10-28
+
+### Fixed
+- Accept both corrected and uncorrected RHE LSV column labels from toolbox 2.7.2.
+- Use toolbox validation and per-file resistance resolution; nonzero LSV
+  compensation can use each filename's resistance. Missing resistance fails the
+  affected measurement instead of silently disabling correction.
+
 ## [0.1.0] - 2026-10-27
 
 ### Added
