@@ -55,6 +55,17 @@ class CsvAdapterTests(unittest.TestCase):
         self.assertEqual(table['columns'][0], ['sample.txt'])
         self.assertEqual(table['pairs'], [(4,5)])
 
+    def test_uncorrected_lsv_label_and_provenance(self):
+        table = self.read([
+            ['Resistance source', 'not supplied', 'iR correction applied', 'no'],
+            ['File','Point','Original Potential','Original Current','Potential (V vs. RHE)','Current density'],
+            ['','','V','mA','V vs. RHE','mA/cm2'],
+            ['sample.txt',1,.5,10,1.429,10]])
+        self.assertEqual(table['kind'], 'LSV')
+        self.assertEqual(table['columns'][4], [1.429])
+        self.assertEqual(table['metadata'][0][-1], 'no')
+        self.assertNotIn('iR-corrected', table['names'][4])
+
     def test_cv_trailing_padding_and_scan_labels(self):
         rows = [['Potential','Current density']*2, ['V','mA/cm2']*2,
                 ['10 mV/s']*2+['20 mV/s']*2, [.2,1,.2,2], [.3,1.5,'','']]

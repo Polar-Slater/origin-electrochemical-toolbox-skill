@@ -11,8 +11,8 @@ Create a JSON settings file with all these fields, using values established for 
 - `working_area_cm2`: positive electrode area.
 - `reference_potential_v`: additive reference-to-RHE offset in V, under the experimental conditions. Do not guess from an electrode name alone.
 - `equilibrium_potential_v`: equilibrium potential in V versus RHE appropriate to the requested reaction. Recorded by the processor; not subtracted from its LSV corrected-potential column.
-- `solution_resistance_ohm`: explicit resistance, or null if compensation is zero. Upstream may infer it from a filename.
-- `compensation_percent`: explicit value from 0 to 100. Nonzero compensation requires explicit resistance in the helper.
+- `solution_resistance_ohm`: explicit resistance shared by selected LSV files, or null to resolve each filename independently. Missing resistance is allowed when compensation is zero.
+- `compensation_percent`: finite value from 0 to 100. Nonzero compensation requires a resistance supplied explicitly or found in that file's name; otherwise that LSV file fails without writing its CSV. Requires toolbox 2.7.2 or later.
 - `ecsa_cycle_number`: positive cycle number, or null for the toolbox's last-cycle behavior.
 - `cp_solution_resistance_ohm` and `cp_compensation_percent`: separate CP correction settings. CA does not use potential correction.
 

@@ -1,6 +1,6 @@
 # Origin electrochemical toolbox skill
 
-Version **0.1.0**. A reusable agent skill that connects [Polar-Slater's electrochemical toolbox](https://github.com/Polar-Slater/Electrochemical_data_analysis) to editable OriginPro figures. It reuses the toolbox's calculations rather than introducing new electrochemical methods.
+Version **0.1.1**. A reusable agent skill that connects [Polar-Slater's electrochemical toolbox](https://github.com/Polar-Slater/Electrochemical_data_analysis) to editable OriginPro figures. It reuses the toolbox's calculations rather than introducing new electrochemical methods.
 
 ## Repository layout
 
@@ -18,6 +18,9 @@ Third-party checkouts and virtual environments are local dependencies, not inclu
 ## Install
 
 Requires Windows, a licensed Origin/OriginPro installation, and Windows Python. The author's live tests used OriginPro 2024b 64-bit 10.1.5.132 with Python 3.14.6. Other versions need their own compatibility check.
+
+Processing with this release requires toolbox 2.7.2 or later for strict
+correction validation and per-file resistance provenance.
 
 ```powershell
 git clone https://github.com/Polar-Slater/origin-electrochemical-toolbox-skill.git

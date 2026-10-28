@@ -26,6 +26,8 @@ def main():
         parser.error('Toolbox path does not contain the v2.0 origin_csv.py processor')
     os.environ.setdefault('MPLBACKEND', 'Agg')
     sys.path.insert(0, str(args.toolbox / 'Electrochemical_data_analysis_toolbox v2.0'))
+    if not (args.toolbox / 'Electrochemical_data_analysis_toolbox v2.0' / 'correction_settings.py').is_file():
+        parser.error('Processing requires toolbox 2.7.2 or later with shared correction validation')
     from origin_csv import ProcessingSettings, process_files, process_sample_folder
     values = json.loads(args.settings.read_text(encoding='utf-8-sig'))
     expected = {f.name for f in dataclasses.fields(ProcessingSettings)}
@@ -40,11 +42,11 @@ def main():
     cycle = values['ecsa_cycle_number']
     if cycle is not None and (not isinstance(cycle, int) or cycle < 1):
         parser.error('ecsa_cycle_number must be a positive integer or null')
-    for percent, resistance in [('compensation_percent', 'solution_resistance_ohm'), ('cp_compensation_percent', 'cp_solution_resistance_ohm')]:
-        if values[percent] > 0 and values[resistance] is None:
-            parser.error(f'Nonzero {percent} requires explicit {resistance}')
     settings = ProcessingSettings(**values)
-    settings.validate()
+    try:
+        settings.validate()
+    except ValueError as exc:
+        parser.error(str(exc))
     paths = sorted(args.folder.glob('*.txt')) if args.folder else args.files
     if not paths or any(not p.is_file() for p in paths):
         parser.error('No readable source files found')
